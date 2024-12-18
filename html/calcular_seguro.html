@@ -4,63 +4,186 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calcular Seguro</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/styles.css">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/styles.css"> -->
+
+    <style>
+      body {
+          font-family: Arial, sans-serif;
+          margin: 20px;
+      }
+      form {
+          max-width: 600px;
+          margin: auto;
+      }
+      .form-group {
+          margin-bottom: 15px;
+      }
+      label {
+          display: block;
+          margin-bottom: 5px;
+          font-weight: bold;
+      }
+      input, select {
+          width: 100%;
+          padding: 8px;
+          box-sizing: border-box;
+      }
+      .file-upload {
+          border: 2px dashed #ccc;
+          padding: 20px;
+          text-align: center;
+          cursor: pointer;
+      }
+      .file-upload:hover {
+          border-color: #888;
+      }
+      #file-preview {
+          margin-top: 10px;
+          max-height: 200px;
+      }
+      .checkbox {
+          display: flex;
+          align-items: center;
+      }
+      .checkbox input {
+          margin-right: 10px;
+      }
+  </style>
 </head>
 <body>
     <main>
         <h1>Calcular Seguro</h1>
-        <form class="shadow-lg rounded">
-            <div class="row mb-3">
-              <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-              <div class="col-sm-10">
-                <input type="email" class="form-control" id="inputEmail3">
+        <form>
+          <fieldset>
+              <legend>Datos Personales</legend>
+              <!-- Texto -->
+              <div class="form-group">
+                  <label for="nombre">Nombre</label>
+                  <input type="text" id="nombre" name="nombre" required>
               </div>
-            </div>
-            <div class="row mb-3">
-              <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-              <div class="col-sm-10">
-                <input type="password" class="form-control" id="inputPassword3">
+              <div class="form-group">
+                  <label for="apellidos">Apellidos</label>
+                  <input type="text" id="apellidos" name="apellidos" required>
               </div>
-            </div>
-            <fieldset class="row mb-3">
-              <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
-              <div class="col-sm-10">
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                  <label class="form-check-label" for="gridRadios1">
-                    First radio
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                  <label class="form-check-label" for="gridRadios2">
-                    Second radio
-                  </label>
-                </div>
-                <div class="form-check disabled">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
-                  <label class="form-check-label" for="gridRadios3">
-                    Third disabled radio
-                  </label>
-                </div>
+              <div class="form-group">
+                  <label for="dni">DNI</label>
+                  <input type="text" id="dni" name="dni" required>
               </div>
-            </fieldset>
-            <div class="row mb-3">
-              <div class="col-sm-10 offset-sm-2">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="gridCheck1">
-                  <label class="form-check-label" for="gridCheck1">
-                    Example checkbox
-                  </label>
-                </div>
+              <div class="form-group">
+                  <label for="correo">Correo Electrónico</label>
+                  <input type="email" id="correo" name="correo" required>
               </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Sign in</button>
-          </form>
+          </fieldset>
+      
+          <fieldset>
+              <legend>Información de Contacto</legend>
+              <!-- Números -->
+              <div class="form-group">
+                  <label for="telefono">Teléfono</label>
+                  <input type="tel" id="telefono" name="telefono" required>
+              </div>
+              <div class="form-group">
+                  <label for="codigo-postal">Código Postal</label>
+                  <input type="number" id="codigo-postal" name="codigo-postal" required>
+              </div>
+          </fieldset>
+      
+          <fieldset>
+              <legend>Fechas Importantes</legend>
+              <!-- Fechas -->
+              <div class="form-group">
+                  <label for="fecha-carnet">Fecha del Carnet de Conducir</label>
+                  <input type="date" id="fecha-carnet" name="fecha-carnet" required>
+              </div>
+              <div class="form-group">
+                  <label for="fecha-matriculacion">Fecha de Matriculación</label>
+                  <input type="date" id="fecha-matriculacion" name="fecha-matriculacion" required>
+              </div>
+              <div class="form-group">
+                  <label for="fecha-nacimiento">Fecha de Nacimiento</label>
+                  <input type="date" id="fecha-nacimiento" name="fecha-nacimiento" required>
+              </div>
+          </fieldset>
+      
+          <fieldset>
+              <legend>Selecciones</legend>
+              <!-- Selectores -->
+              <div class="form-group">
+                  <label for="sexo">Sexo</label>
+                  <select id="sexo" name="sexo" required>
+                      <option value="">Seleccione</option>
+                  </select>
+              </div>
+              <div class="form-group">
+                  <label for="poblaciones">Comunidad</label>
+                  <select name="poblaciones" id="poblaciones" required>
+                      <option value="">Seleccione</option>
+                      <!-- Opciones de comunidad -->
+                  </select>
+              </div>
+              <div class="form-group">
+                  <label for="provincia">Provincia</label>
+                  <select name="provincia" id="provincia" required>
+                      <option value="">Seleccione</option>
+                      <!-- Opciones de provincia -->
+                  </select>
+              </div>
+              <div class="form-group">
+                  <label for="marcas">Marca</label>
+                  <select id="marcas" name="marcas" required>
+                      <option value="">Seleccione</option>
+                      <!-- Opciones de marca -->
+                  </select>
+              </div>
+              <div class="form-group">
+                  <label for="modelo">Modelo</label>
+                  <select id="modelo" name="modelo" required>
+                      <option value="">Seleccione</option>
+                      <!-- Opciones de modelo -->
+                  </select>
+              </div>
+              <div class="form-group">
+                  <label for="tipo_seguro">Tipo de Seguro</label>
+                  <select id="tipo_seguro" name="tipo_seguro" required>
+                      <option value="">Seleccione</option>
+                  </select>
+              </div>
+              <div class="form-group">
+                  <label for="tipo_vehiculo">Tipo de Vehículo</label>
+                  <select id="tipo_vehiculo" name="tipo_vehiculo" required>
+                      <option value="">Seleccione</option>
+
+                  </select>
+              </div>
+          </fieldset>
+      
+          <fieldset>
+              <legend>Subir Archivo</legend>
+              <!-- Fichero -->
+              <div class="form-group">
+                  <label for="foto-carnet">Foto del Carnet de Conducir (JPG)</label>
+                  <div class="file-upload" onclick="document.getElementById('foto-carnet').click();">
+                      Haga clic o arrastre para subir una imagen
+                  </div>
+                  <input type="file" id="foto-carnet" name="foto-carnet" accept="image/jpeg" style="display: none;" onchange="previewFile()">
+                  <img id="file-preview" src="" alt="Previsualización de la imagen">
+              </div>
+          </fieldset>
+      
+          <fieldset>
+              <legend>Términos y Condiciones</legend>
+              <!-- Checkbox -->
+              <div class="form-group checkbox">
+                  <input type="checkbox" id="terminos" name="terminos" required>
+                  <label for="terminos">Acepto los términos y condiciones</label>
+              </div>
+          </fieldset>
+      
+          <button type="submit">Enviar</button>
+      </form>
     </main>
     
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script type="module" src="../javascript/index.js"></script>
 </body>
 </html>
