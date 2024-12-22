@@ -41250,3 +41250,41 @@ export const optionTypes = {
     ]
 };
 
+export const validaciones = [
+  {
+      nombreCampo: "nombre",
+      placeHolder: "Solo letras, no vacíos. Máximo 30 caracteres por campo",
+      regex: "^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,30}$" // Solo letras, espacios, máximo 30 caracteres.
+  },
+  {
+      nombreCampo: "apellidos",
+      placeHolder: "Solo letras, no vacíos. Máximo 30 caracteres por campo",
+      regex: "^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,30}$" // Solo letras, espacios, máximo 30 caracteres.
+  },
+  {
+      nombreCampo: "dni",
+      placeHolder: "Ocho dígitos y letra mayúscula",
+      regex: "^[0-9]{8}[A-Z]$" // Ocho dígitos seguidos de una letra mayúscula.
+  },
+  {
+    nombreCampo: "correo",
+    placeHolder: "Debe Respetar Formato Email",
+    regex: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+  },
+  {
+      nombreCampo: "matricula",
+      placeHolder:  "Formato español válido (e.g., 1234-ABC)",
+      regex: "^[0-9]{4}-[A-Z]{3}$" // Matrícula española (4 números seguidos de un guion y 3 letras mayúsculas).
+  },
+  {
+      nombreCampo: "codigo-postal",
+      placeHolder: "5 dígitos numéricos.",
+      regex: "^\\d{5}$" // Código postal de 5 dígitos numéricos.
+  },
+  {
+      nombreCampo: "foto-carnet",
+      placeHolder: "Fichero tipo jpg",
+      regex: "^.+\\.jpg$" // Fichero con extensión .jpg.
+  }
+];
+
