@@ -16,17 +16,6 @@ export const drawSelectOptions = () => {
                 selectElement.appendChild(optionElement);
 
             });
-            selectElement = document.getElementById('provincia');
-
-            optionTypes[optionType].forEach(comunidad => {
-
-                counterProvincias += comunidad['provinces'].length;
-                comunidad['provinces'].forEach(provincia => {
-                    optionElement = document.createElement('option');
-                    optionElement.textContent = provincia['label'];
-                    selectElement.appendChild(optionElement);
-                });
-            });
 
         } else if (optionType === 'marcas') {
             
