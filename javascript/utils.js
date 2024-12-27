@@ -41,18 +41,40 @@ export const drawSelectOptions = () => {
 }
 
 export const validar = (event,valorCampoFormulario,validacion) => {
-
+    console.log(event,valorCampoFormulario,validacion);
+    
     if (validacion) {
         // Crear una instancia de RegExp a partir de la expresión regular
         const regex = new RegExp(validacion["regex"]);
-    
+        
+
         // Verificar si el valor cumple con la expresión regular
         if (regex.test(valorCampoFormulario)) {
-            event.target.classList.remove("error");
-            event.target.classList.add("valid");
+
+            if (event.target.id === 'foto-carnet') {
+
+                let imageContainer = document.querySelector(".file-upload");
+                imageContainer.classList.remove("error");
+                imageContainer.classList.add("valid");
+            }else {
+
+                event.target.classList.remove("error");
+                event.target.classList.add("valid");
+            }
+
         } else {
-            event.target.classList.remove("valid");
-            event.target.classList.add("error");
+
+            if (event.target.id === 'foto-carnet') {
+
+                let imageContainer = document.querySelector(".file-upload");
+                imageContainer.classList.remove("valid");
+                imageContainer.classList.add("error");
+            }else {
+
+                event.target.classList.remove("error");
+                event.target.classList.add("valid");
+            }
+
         }
     }
 }

@@ -73,11 +73,13 @@
 
         .valid {
 
-        border: 2px solid green;
+            border: 2px solid green;
+            background-color:green;
         }
         .error {
 
-        border: 2px solid red;
+            border: 2px solid red;
+            background-color:red;
         }
         .tarjetas-seguros {
 
@@ -232,7 +234,7 @@
                   <div class="file-upload" onclick="document.getElementById('foto-carnet').click();">
                       Haga clic o arrastre para subir una imagen
                   </div>
-                  <input type="file" id="foto-carnet" name="foto-carnet" accept="image/jpeg" style="display: none;">
+                  <input type="file" id="foto-carnet" name="foto-carnet" accept="image/jpg" style="display: none;">
                   <img id="file-preview" src="" alt="Previsualización de la imagen">
               </div>
           </fieldset>

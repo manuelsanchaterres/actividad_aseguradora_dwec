@@ -19,7 +19,7 @@ export const handleKeyUp = () => {
 
 }
 
-/* handle para aplicar validaciones a fecha-carnet y fecha-matriculacion
+/* handle para aplicar validaciones de fecha no posterior a hoy para los campos fecha-nacimiento, fecha-carnet y fecha-matriculacion
    al cargar el DOM del formulario
 */
 export const handleContentLoad = () => {
@@ -117,7 +117,11 @@ export const handleChange = () => {
             const idCampoFormulario = event.target.id;
             const valorCampoFormulario = event.target.value;
             const validacion = validaciones.find((validacion) => validacion["nombreCampo"] === idCampoFormulario);
-            validar(event,valorCampoFormulario,validacion);
+            if (validar(event,valorCampoFormulario,validacion)) {
+
+                console.log();
+                
+            };
         }
         
     })
