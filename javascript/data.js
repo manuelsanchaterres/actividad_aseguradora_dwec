@@ -41288,7 +41288,7 @@ export const validaciones = [
   }
 ];
 
-export const precioBaseSeguros = [
+export const datosSeguros = [
   {
     tipo: "terceros",
     precio:500

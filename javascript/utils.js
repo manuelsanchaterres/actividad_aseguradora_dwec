@@ -1,4 +1,4 @@
-import {optionTypes,precioBaseSeguros,penalizacionTipoVehiculo} from './data.js'
+import {optionTypes,datosSeguros,penalizacionTipoVehiculo} from './data.js'
 export const drawSelectOptions = () => {
     const optionTypesList = Object.keys(optionTypes);
     let selectElement;
@@ -93,27 +93,24 @@ export const crearObjetoDatosFormulario = (event) => {
     const formDataObject = Object.fromEntries(formData.entries());
     return formDataObject ;
 }
-export const calcularSeguro = (formData) => {
+export const calcularSeguro = (formData,seguro) => {
 
     let precioSeguro = 0;
     // Buscamos el seguro que corresponda con el valor del select de tipo de seguro
-    const seguro = precioBaseSeguros.find((seguro) => seguro['tipo'] === formData['tipo_seguro'].toLowerCase());
+    // const seguro = datosSeguros.find((seguro) => seguro['tipo'] === formData['tipo_seguro'].toLowerCase());
     const penalizacionTipo = penalizacionTipoVehiculo.find((penalizacion) => penalizacion['tipo'] === formData['tipo_vehiculo'].toLowerCase());
     const tiempoVehiculo = calcularTiempo(new Date(formData['fecha-matriculacion']));
     let penalizacion = 0;
     if (seguro) {
 
         precioSeguro = seguro['precio'];
-        console.log(precioSeguro);
         if (calcularTiempo(new Date(formData['fecha-nacimiento'])) >= 18 && calcularTiempo(new Date(formData['fecha-nacimiento'])) < 25) {
 
             precioSeguro *= 1.1;
-            console.log(precioSeguro);
         }
         if (calcularTiempo(new Date(formData['fecha-carnet'])) > 5) {
 
             precioSeguro *= 0.9;
-            console.log(precioSeguro);
         }
         if (penalizacionTipo) {
             penalizacion = penalizacionTipo['penalizacion'] / 100;
@@ -123,8 +120,22 @@ export const calcularSeguro = (formData) => {
 
             const penalizacion = (tiempoVehiculo - 10) / 100;
             precioSeguro *= 1 + penalizacion;
-            console.log(precioSeguro);
         }
+
+        
     }
-    
+    return precioSeguro.toFixed(2);
+}
+
+export const calcularSeguroTodoTipos = (formData,datosSeguros) => {
+
+    let arraySeguros = [];
+
+    datosSeguros.forEach(seguro => {
+
+        arraySeguros.push({"tipoSeguro": seguro["tipo"],"precioFinal":calcularSeguro(formData,seguro)});
+        
+    });
+
+    console.log(arraySeguros);
 }

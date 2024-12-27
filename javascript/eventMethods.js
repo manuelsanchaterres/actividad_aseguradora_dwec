@@ -1,5 +1,5 @@
-import {validaciones, optionTypes} from "./data.js"
-import {validar,calcularTiempo,verificarFormularioValido,crearObjetoDatosFormulario,calcularSeguro} from "./utils.js"
+import {validaciones, optionTypes,datosSeguros} from "./data.js"
+import {validar,calcularTiempo,verificarFormularioValido,crearObjetoDatosFormulario,calcularSeguroTodoTipos} from "./utils.js"
 export const handleKeyUp = () => {
 
     document.addEventListener("keyup", (event) => {
@@ -124,7 +124,11 @@ export const handleSubmit = () => {
 
         event.preventDefault();
         const formData = crearObjetoDatosFormulario(event);
-        if(verificarFormularioValido()) calcularSeguro(formData);
+        if(verificarFormularioValido()) {
+            
+            
+            calcularSeguroTodoTipos(formData,datosSeguros)
+        };
         
     })
     
