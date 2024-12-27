@@ -1,4 +1,5 @@
-import { validaciones, optionTypes} from "./data.js"
+import {validaciones, optionTypes} from "./data.js"
+import {validar,calcularEdad} from "./utils.js"
 export const handleKeyUp = () => {
 
     document.addEventListener("keyup", (event) => {
@@ -6,22 +7,7 @@ export const handleKeyUp = () => {
         const idCampoFormulario = event.target.id;
         const valorCampoFormulario = event.target.value;
         const validacion = validaciones.find((validacion) => validacion["nombreCampo"] === idCampoFormulario);
-        console.log(valorCampoFormulario);
-        
-        if (validacion) {
-            // Crear una instancia de RegExp a partir de la expresión regular
-            const regex = new RegExp(validacion["regex"]);
-        
-            // Verificar si el valor cumple con la expresión regular
-            if (regex.test(valorCampoFormulario)) {
-                event.target.classList.remove("error");
-                event.target.classList.add("valid");
-            } else {
-                event.target.classList.remove("valid");
-                event.target.classList.add("error");
-            }
-        }
-        
+        validar(event,valorCampoFormulario,validacion);
     })
 
 }
@@ -63,29 +49,17 @@ export const handleChange = () => {
     document.addEventListener("change", (event) => {
 
         const elementoFormulario = event.target;
-        const idCampoFormulario = event.target.id;
+        const idCampoFormulario = elementoFormulario.id;
         let optionElement = "";
         let selectElement = "";
         // verificar mayor o igual a 18 años de edad
         if (idCampoFormulario === 'fecha-nacimiento') {
 
             const fechaNacimiento = event.target.value;
-            const hoy = new Date();
             const fechaNacimientoIntroducida = new Date(fechaNacimiento);
-    
-            // Calcular la diferencia de años
-            let edad = hoy.getFullYear() - fechaNacimientoIntroducida.getFullYear();
-            const mes = hoy.getMonth() - fechaNacimientoIntroducida.getMonth();
-    
-            /* Si el mes de la fecha de nacimiento es posterior al mes actual o el dia 
-            introducido es mayor al de hoy dentro del mismo mes, restar un año todavía no ha cumplido años 
-            en el ejercicio actual*/
-            if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimientoIntroducida.getDate())) {
-                edad--;
-            }
-    
+
             // Verificar si la persona tiene al menos 18 años
-            if (edad < 18) {
+            if (calcularEdad(fechaNacimientoIntroducida) < 18) {
                 alert('Debes Tener 18 años o más.');
                 elementoFormulario.classList.remove('valid');
                 elementoFormulario.classList.add('error');
@@ -93,6 +67,7 @@ export const handleChange = () => {
             
                 elementoFormulario.classList.remove('error');
             }
+            
         } else if (idCampoFormulario === 'poblaciones') {
 
             const comunidadSeleccionada = event.target.value;
@@ -131,6 +106,13 @@ export const handleChange = () => {
                 });
             }
 
+        } else if (idCampoFormulario === 'foto-carnet') {
+            const idCampoFormulario = event.target.id;
+            const valorCampoFormulario = event.target.value;
+            const validacion = validaciones.find((validacion) => validacion["nombreCampo"] === idCampoFormulario);
+            console.log(valorCampoFormulario);
+            
+            validar(event,valorCampoFormulario,validacion);
         }
         
     })
@@ -145,3 +127,5 @@ export const handleSelect = () => {
     })
 
 }
+
+

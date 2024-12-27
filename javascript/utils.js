@@ -24,12 +24,6 @@ export const drawSelectOptions = () => {
                 optionElement = document.createElement('option');
                 optionElement.textContent = marca['nombre'];
                 selectElement.appendChild(optionElement);
-                marca['modelos'].forEach(modelo => {
-                    optionElement = document.createElement('option');
-                    optionElement.textContent = modelo;
-                    modeloElement.appendChild(optionElement);
-                });
-
             });
 
         } else {
@@ -44,4 +38,41 @@ export const drawSelectOptions = () => {
         }
     });
 
+}
+
+export const validar = (event,valorCampoFormulario,validacion) => {
+
+    if (validacion) {
+        // Crear una instancia de RegExp a partir de la expresión regular
+        const regex = new RegExp(validacion["regex"]);
+    
+        // Verificar si el valor cumple con la expresión regular
+        if (regex.test(valorCampoFormulario)) {
+            console.log("valido");
+            
+            event.target.classList.remove("error");
+            event.target.classList.add("valid");
+        } else {
+            console.log("invalido");
+            event.target.classList.remove("valid");
+            event.target.classList.add("error");
+        }
+    }
+}
+
+export const calcularEdad = (fechaNacimientoIntroducida) => {
+
+    const hoy = new Date();
+    // Calcular la diferencia de años
+    let edad = hoy.getFullYear() - fechaNacimientoIntroducida.getFullYear();
+    const mes = hoy.getMonth() - fechaNacimientoIntroducida.getMonth();
+
+    /* Si el mes de la fecha de nacimiento es posterior al mes actual o el dia 
+    introducido es mayor al de hoy dentro del mismo mes, restar un año todavía no ha cumplido años 
+    en el ejercicio actual*/
+    if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimientoIntroducida.getDate())) {
+        edad--;
+    }
+
+    return edad;
 }

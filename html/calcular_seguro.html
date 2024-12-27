@@ -32,6 +32,24 @@
       input:focus {
         outline: none; /* Elimina el borde del foco */
       }
+        /*  estas pseudoclases eliminan las flechas de incremento o decremento
+        que vienen por defecto en input tipo number */
+      /* Para Chrome, Safari y Edge */
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Para Firefox */
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        /* Para Internet Explorer */
+        input[type="number"]::-ms-clear {
+            display: none;
+        }
       .file-upload {
           border: 2px dashed #ccc;
           padding: 20px;
@@ -183,7 +201,7 @@
                   <div class="file-upload" onclick="document.getElementById('foto-carnet').click();">
                       Haga clic o arrastre para subir una imagen
                   </div>
-                  <input type="file" id="foto-carnet" name="foto-carnet" accept="image/jpeg" style="display: none;" onchange="previewFile()">
+                  <input type="file" id="foto-carnet" name="foto-carnet" accept="image/jpeg" style="display: none;">
                   <img id="file-preview" src="" alt="Previsualización de la imagen">
               </div>
           </fieldset>
@@ -197,7 +215,7 @@
               </div>
           </fieldset>
       
-          <button type="submit" disabled>Enviar</button>
+          <button type="submit">Enviar</button>
       </form>
     </main>
     
