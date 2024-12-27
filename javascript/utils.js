@@ -84,3 +84,15 @@ export const verificarFormularioValido = () => {
         return true;
     }
 }
+
+export const crearObjetoDatosFormulario = (event) => {
+
+    const formData = new FormData(event.target);
+    const formDataObject = Object.fromEntries(formData.entries());
+    return formDataObject ;
+}
+export const calcularSeguro = (formData) => {
+
+    
+    
+}
