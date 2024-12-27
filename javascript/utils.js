@@ -41,19 +41,18 @@ export const drawSelectOptions = () => {
 }
 
 export const validar = (event,valorCampoFormulario,validacion) => {
-    console.log(event,valorCampoFormulario,validacion);
-    
+
     if (validacion) {
         // Crear una instancia de RegExp a partir de la expresión regular
         const regex = new RegExp(validacion["regex"]);
         
-
         // Verificar si el valor cumple con la expresión regular
         if (regex.test(valorCampoFormulario)) {
 
             if (event.target.id === 'foto-carnet') {
 
                 let imageContainer = document.querySelector(".file-upload");
+                imageContainer.style.backgroundColor = "green";
                 imageContainer.classList.remove("error");
                 imageContainer.classList.add("valid");
             }else {
@@ -61,19 +60,22 @@ export const validar = (event,valorCampoFormulario,validacion) => {
                 event.target.classList.remove("error");
                 event.target.classList.add("valid");
             }
-
+            return true;
         } else {
 
             if (event.target.id === 'foto-carnet') {
 
                 let imageContainer = document.querySelector(".file-upload");
+                imageContainer.style.backgroundColor = "red";
                 imageContainer.classList.remove("valid");
                 imageContainer.classList.add("error");
             }else {
 
-                event.target.classList.remove("error");
-                event.target.classList.add("valid");
+                event.target.classList.remove("valid");
+                event.target.classList.add("error");
             }
+
+            return false;
 
         }
     }
@@ -212,4 +214,34 @@ export const mostrarSeguros = (seguros) =>{
         tarjetasSeguros.appendChild(container);
     });
     
+}
+
+export const previsualizarImagen = (elementoFormulario) => {
+    
+    const file = elementoFormulario.files[0]; // Obtener el primer archivo seleccionado
+    console.log(file);
+    
+    if (file) {
+        // Verificar que el archivo sea una imagen
+        if (file.type.startsWith('image/')) {
+            const reader = new FileReader();  // Crear un nuevo objeto FileReader
+            
+            // Establecer lo que sucede cuando se haya leído el archivo
+            reader.onload = (event) =>{
+                const imagePreview = document.getElementById('file-preview');
+                const previewContainer = document.getElementById('image-preview-container');
+                
+                // Establecer la fuente de la imagen de previsualización
+                imagePreview.src = event.target.result;
+                imagePreview.style.border = "2px solid black";
+                // Mostrar la previsualización
+                previewContainer.style.display = 'flex';
+            };
+            
+            // Leer el archivo como una URL de datos (Data URL)
+            reader.readAsDataURL(file);
+        } else {
+            alert('Por favor, selecciona una imagen válida (JPG, PNG, GIF).');
+        }
+    }
 }

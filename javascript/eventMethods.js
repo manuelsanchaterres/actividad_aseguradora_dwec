@@ -5,7 +5,8 @@ import {
     verificarFormularioValido,
     crearObjetoDatosFormulario,
     calcularSeguroTodoTipos, 
-    mostrarSeguros
+    mostrarSeguros,
+    previsualizarImagen
 } from "./utils.js"
 export const handleKeyUp = () => {
 
@@ -119,7 +120,7 @@ export const handleChange = () => {
             const validacion = validaciones.find((validacion) => validacion["nombreCampo"] === idCampoFormulario);
             if (validar(event,valorCampoFormulario,validacion)) {
 
-                console.log();
+                previsualizarImagen(elementoFormulario);
                 
             };
         }

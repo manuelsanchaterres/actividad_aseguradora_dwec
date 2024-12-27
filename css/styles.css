@@ -1,1 +1,105 @@
-body{font-size:16px}body main{margin-top:2rem;display:flex;flex-direction:column;align-items:center}body main form{width:50%;border:2px solid #000;padding:1.5rem}/*# sourceMappingURL=styles.css.map */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+form {
+    max-width: 600px;
+    margin: auto;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+input, select {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+input:focus {
+outline: none; /* Elimina el borde del foco */
+}
+/*  estas pseudoclases eliminan las flechas de incremento o decremento
+que vienen por defecto en input tipo number */
+/* Para Chrome, Safari y Edge */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Para Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* Para Internet Explorer */
+input[type="number"]::-ms-clear {
+    display: none;
+}
+.file-upload {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+.file-upload:hover {
+    border-color: #888;
+}
+#file-preview {
+    margin-top: 10px;
+    max-height: 200px;
+}
+.checkbox {
+    display: flex;
+    align-items: center;
+}
+.checkbox input {
+    margin-right: 10px;
+}
+
+.valid {
+
+    border: 2px solid green;
+}
+.error {
+
+    border: 2px solid red;
+}
+.tarjetas-seguros {
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.detalles-seguro {
+    border: 2px solid black;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    background-color: white;
+    width: 200px;
+    margin: 20px auto;
+}
+.button {
+    margin: 10px 5px;
+    padding: 10px 15px;
+    border: 2px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.contratar {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.descartar {
+    background-color: #f44336;
+    color: white;
+}
+.image-preview-container {
+    justify-content: center;
+}
