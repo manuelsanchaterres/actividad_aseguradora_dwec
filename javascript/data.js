@@ -41288,3 +41288,40 @@ export const validaciones = [
   }
 ];
 
+export const precioBaseSeguros = [
+  {
+    tipo: "terceros",
+    precio:500
+  },
+  {
+    tipo: "terceros ampliado",
+    precio:650
+  },
+  {
+    tipo: "con franquicia",
+    precio:750
+  },
+  {
+    tipo: "todo riesgo",
+    precio:1000
+  },
+];
+
+export const penalizacionTipoVehiculo = [
+  {
+    tipo: "diesel",
+    penalizacion:20
+  },
+  {
+    tipo: "gasolina",
+    penalizacion:15
+  },
+  {
+    tipo: "hibrido",
+    penalizacion:5
+  },
+  {
+    tipo: "electrico",
+    penalizacion:0
+  },
+]

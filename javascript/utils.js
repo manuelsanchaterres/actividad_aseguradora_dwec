@@ -1,4 +1,4 @@
-import {optionTypes} from './data.js'
+import {optionTypes,precioBaseSeguros,penalizacionTipoVehiculo} from './data.js'
 export const drawSelectOptions = () => {
     const optionTypesList = Object.keys(optionTypes);
     let selectElement;
@@ -57,21 +57,23 @@ export const validar = (event,valorCampoFormulario,validacion) => {
     }
 }
 
-export const calcularEdad = (fechaNacimientoIntroducida) => {
+export const calcularTiempo = (fechaNacimientoIntroducida) => {
 
+    console.log(fechaNacimientoIntroducida);
+    console.log(typeof fechaNacimientoIntroducida);
     const hoy = new Date();
     // Calcular la diferencia de años
-    let edad = hoy.getFullYear() - fechaNacimientoIntroducida.getFullYear();
+    let tiempo = hoy.getFullYear() - fechaNacimientoIntroducida.getFullYear();
     const mes = hoy.getMonth() - fechaNacimientoIntroducida.getMonth();
 
     /* Si el mes de la fecha de nacimiento es posterior al mes actual o el dia 
     introducido es mayor al de hoy dentro del mismo mes, restar un año todavía no ha cumplido años 
     en el ejercicio actual*/
     if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimientoIntroducida.getDate())) {
-        edad--;
+        tiempo--;
     }
 
-    return edad;
+    return tiempo;
 }
 
 export const verificarFormularioValido = () => {
@@ -93,6 +95,36 @@ export const crearObjetoDatosFormulario = (event) => {
 }
 export const calcularSeguro = (formData) => {
 
-    
+    let precioSeguro = 0;
+    // Buscamos el seguro que corresponda con el valor del select de tipo de seguro
+    const seguro = precioBaseSeguros.find((seguro) => seguro['tipo'] === formData['tipo_seguro'].toLowerCase());
+    const penalizacionTipo = penalizacionTipoVehiculo.find((penalizacion) => penalizacion['tipo'] === formData['tipo_vehiculo'].toLowerCase());
+    const tiempoVehiculo = calcularTiempo(new Date(formData['fecha-matriculacion']));
+    let penalizacion = 0;
+    if (seguro) {
+
+        precioSeguro = seguro['precio'];
+        console.log(precioSeguro);
+        if (calcularTiempo(new Date(formData['fecha-nacimiento'])) >= 18 && calcularTiempo(new Date(formData['fecha-nacimiento'])) < 25) {
+
+            precioSeguro *= 1.1;
+            console.log(precioSeguro);
+        }
+        if (calcularTiempo(new Date(formData['fecha-carnet'])) > 5) {
+
+            precioSeguro *= 0.9;
+            console.log(precioSeguro);
+        }
+        if (penalizacionTipo) {
+            penalizacion = penalizacionTipo['penalizacion'] / 100;
+            precioSeguro *= 1 + penalizacion;
+        }
+        if (tiempoVehiculo > 10) {
+
+            const penalizacion = (tiempoVehiculo - 10) / 100;
+            precioSeguro *= 1 + penalizacion;
+            console.log(precioSeguro);
+        }
+    }
     
 }

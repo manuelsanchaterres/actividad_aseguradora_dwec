@@ -1,5 +1,5 @@
 import {validaciones, optionTypes} from "./data.js"
-import {validar,calcularEdad,verificarFormularioValido,crearObjetoDatosFormulario,calcularSeguro} from "./utils.js"
+import {validar,calcularTiempo,verificarFormularioValido,crearObjetoDatosFormulario,calcularSeguro} from "./utils.js"
 export const handleKeyUp = () => {
 
     document.addEventListener("keyup", (event) => {
@@ -59,7 +59,7 @@ export const handleChange = () => {
             const fechaNacimientoIntroducida = new Date(fechaNacimiento);
 
             // Verificar si la persona tiene al menos 18 años
-            if (calcularEdad(fechaNacimientoIntroducida) < 18) {
+            if (calcularTiempo(fechaNacimientoIntroducida) < 18) {
                 alert('Debes Tener 18 años o más.');
                 elementoFormulario.classList.remove('valid');
                 elementoFormulario.classList.add('error');
@@ -128,7 +128,6 @@ export const handleSubmit = () => {
         
     })
     
-
 }
 
 
