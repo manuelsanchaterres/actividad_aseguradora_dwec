@@ -48,12 +48,9 @@ export const validar = (event,valorCampoFormulario,validacion) => {
     
         // Verificar si el valor cumple con la expresión regular
         if (regex.test(valorCampoFormulario)) {
-            console.log("valido");
-            
             event.target.classList.remove("error");
             event.target.classList.add("valid");
         } else {
-            console.log("invalido");
             event.target.classList.remove("valid");
             event.target.classList.add("error");
         }
@@ -75,4 +72,15 @@ export const calcularEdad = (fechaNacimientoIntroducida) => {
     }
 
     return edad;
+}
+
+export const verificarFormularioValido = () => {
+
+    const inputs = document.querySelectorAll('input');
+    const hasError = Array.from(inputs).some(input => input.classList.contains('error'));
+    if (hasError) {
+        return false;
+    } else {
+        return true;
+    }
 }

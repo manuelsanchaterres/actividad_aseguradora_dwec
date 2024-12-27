@@ -1,5 +1,5 @@
 import {validaciones, optionTypes} from "./data.js"
-import {validar,calcularEdad} from "./utils.js"
+import {validar,calcularEdad,verificarFormularioValido} from "./utils.js"
 export const handleKeyUp = () => {
 
     document.addEventListener("keyup", (event) => {
@@ -67,7 +67,7 @@ export const handleChange = () => {
             
                 elementoFormulario.classList.remove('error');
             }
-            
+
         } else if (idCampoFormulario === 'poblaciones') {
 
             const comunidadSeleccionada = event.target.value;
@@ -110,19 +110,21 @@ export const handleChange = () => {
             const idCampoFormulario = event.target.id;
             const valorCampoFormulario = event.target.value;
             const validacion = validaciones.find((validacion) => validacion["nombreCampo"] === idCampoFormulario);
-            console.log(valorCampoFormulario);
-            
             validar(event,valorCampoFormulario,validacion);
         }
         
     })
 }
 
-export const handleSelect = () => {
+export const handleSubmit = () => {
 
-    document.addEventListener("select", (event) => {
+    const form = document.querySelector(".form");
 
-        console.log(event.target.value);
+    form.addEventListener("submit", (event) => {
+
+        event.preventDefault();
+
+        if(verificarFormularioValido());
         
     })
 
