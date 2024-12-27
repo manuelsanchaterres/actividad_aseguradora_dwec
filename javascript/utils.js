@@ -124,7 +124,7 @@ export const calcularSeguro = (formData,seguro) => {
 
         
     }
-    return precioSeguro.toFixed(2);
+    return precioSeguro;
 }
 
 export const calcularSeguroTodoTipos = (formData,datosSeguros) => {
@@ -137,5 +137,57 @@ export const calcularSeguroTodoTipos = (formData,datosSeguros) => {
         
     });
 
-    console.log(arraySeguros);
+    return arraySeguros;
+}
+
+export const mostrarSeguros = (seguros) =>{
+
+    const tarjetasSeguros = document.getElementById('tarjetas-seguros');
+    if (tarjetasSeguros) {
+        tarjetasSeguros.innerHTML = '';
+    } 
+    seguros.forEach(seguro => {
+        const container = document.createElement('div');
+        container.className = 'detalles-seguro';
+
+        const tipoSeguroElement = document.createElement('p');
+        tipoSeguroElement.textContent = `Tipo de Seguro: ${seguro.tipoSeguro}`;
+        container.appendChild(tipoSeguroElement);
+
+        const precioFinalElement = document.createElement('p');
+        precioFinalElement.textContent = `Precio Final: ${seguro.precioFinal.toFixed(2)} €`;
+        container.appendChild(precioFinalElement);
+
+        const botonesTarjeta = document.createElement('div');
+        botonesTarjeta.className = 'botones-tarjeta';
+        // Creamos botón "Contratar"
+        const contratarButton = document.createElement('button');
+        contratarButton.textContent = 'Contratar';
+        contratarButton.className = 'button contratar';
+        contratarButton.addEventListener('mouseover', (event) => {
+            event.target.style.backgroundColor = "darkGreen";
+        });
+        contratarButton.addEventListener('mouseout', (event) => {
+            event.target.style.backgroundColor = ""; // Retoma el Fondo Original
+        });
+        contratarButton.addEventListener('click', () => {
+            alert(`Gracias por contratar el seguro de tipo: ${seguro.tipoSeguro}.  Atentamente tu asesor de seguros Manuel Sancha Terres`);
+        });
+        botonesTarjeta.appendChild(contratarButton);
+
+        // Creamos botón "Descartar Seguro"
+        const descartarButton = document.createElement('button');
+        descartarButton.textContent = 'Descartar Seguro';
+        descartarButton.className = 'button descartar';
+        descartarButton.addEventListener('click', () => {
+            const confirmDiscard = confirm('¿Estás seguro de que quieres descartar este seguro?');
+            if (confirmDiscard) {
+                container.remove(); // Se elimina la carla seleccionada del DOM
+            }
+        });
+        botonesTarjeta.appendChild(descartarButton);
+        container.appendChild(botonesTarjeta);
+        tarjetasSeguros.appendChild(container);
+    });
+    
 }
